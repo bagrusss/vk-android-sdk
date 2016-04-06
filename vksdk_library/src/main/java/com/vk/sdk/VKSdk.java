@@ -248,11 +248,56 @@ public class VKSdk {
      * Starts authorization process. If VK app is available in the system, it will be opened
      * to request access from user. Otherwise, UIWebView with standard UINavigationBar will be used.
      *
+     * @param activity current running activity
+     * @param scope    ArrayList of permissions for your applications
+     */
+    public static void login(@NonNull Activity activity, ArrayList<String> scope) {
+        VKServiceActivity.startLoginActivity(activity, scope);
+    }
+
+    /**
+     * Starts authorization process. If VK app is available in the system, it will be opened
+     * to request access from user. Otherwise, UIWebView with standard UINavigationBar will be used.
+     *
+     * @param activity current running activity
+     * @param scope    int mask of permissions for your applications
+     */
+    public static void login(@NonNull Activity activity, int scope) {
+        VKServiceActivity.startLoginActivity(activity, VKScope.parseVkPermissionsFromInteger(scope));
+    }
+
+    /**
+     * Starts authorization process. If VK app is available in the system, it will be opened
+     * to request access from user. Otherwise, UIWebView with standard UINavigationBar will be used.
+     *
      * @param fragment current running fragment
-     * @param scope    array of permissions for your applicationss
+     * @param scope    array of permissions for your application
      */
     public static void login(@NonNull Fragment fragment, String... scope) {
         VKServiceActivity.startLoginActivity(fragment, requestedPermissions = preparingScopeList(scope));
+    }
+
+    /**
+     * Starts authorization process. If VK app is available in the system, it will be opened
+     * to request access from user. Otherwise, UIWebView with standard UINavigationBar will be used.
+     *
+     * @param fragment current running fragment
+     * @param scope    ArrayList of permissions for your application
+     */
+    public static void login(@NonNull Fragment fragment, ArrayList<String> scope) {
+        VKServiceActivity.startLoginActivity(fragment, scope);
+    }
+
+
+    /**
+     * Starts authorization process. If VK app is available in the system, it will be opened
+     * to request access from user. Otherwise, UIWebView with standard UINavigationBar will be used.
+     *
+     * @param fragment current running fragment
+     * @param scope    int mask of permissions for your application
+     */
+    public static void login(@NonNull Fragment fragment, int scope) {
+        VKServiceActivity.startLoginActivity(fragment, VKScope.parseVkPermissionsFromInteger(scope));
     }
 
     public static boolean onActivityResult(int requestCode, int resultCode, @Nullable Intent data, @NonNull VKCallback<VKAccessToken> vkCallback) {
@@ -465,7 +510,6 @@ public class VKSdk {
         }
 
         VKAccessToken.replaceToken(VKUIHelper.getApplicationContext(), null);
-
         updateLoginState(context);
     }
 
