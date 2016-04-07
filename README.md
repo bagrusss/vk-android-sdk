@@ -158,7 +158,12 @@ There are several authorization methods:
 
 ```
 VKSdk.login(Activity runningActivity, String... scope);
+VKSdk.login(Activity runningActivity, ArrayList<String> scope);
+VKSdk.login(Activity runningActivity, int scope);
+
 VkSdk.login(Fragment runningFragment, String... scope);
+VKSdk.login(Fragment runningFragment, ArrayList<String> scope);
+VKSdk.login(Fragment runningFragment, int scope);
 ```
 
 When succeeded call the onActivityResultMethod:
